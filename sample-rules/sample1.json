@@ -1,6 +1,16 @@
 {
-  "task_category" : "Key-Value Storage as a Service",
-  "attributes" : {"name" : "S3 Storage"},
-  "DeploymentScriptReferences" : [{"provider":"AWS-S3", "link":"link to AWS S3 deployment script"}, {"provider":"Google Cloud Storage", "link":"link to Google Cloud Storage deployment script"}]
-  
+  "task_category": "Key-Value Storage as a Service",
+  "attributes": {
+    "name": "S3 Storage"
+  },
+  "DeploymentScriptReferences": [
+    {
+      "provider": "AWS-S3",
+      "link": "link to AWS S3 deployment script"
+    },
+    {
+      "provider": "Google Cloud Storage",
+      "link": "link to Google Cloud Storage deployment script"
+    }
+  ]
 }
