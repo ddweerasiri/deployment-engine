@@ -1,6 +1,7 @@
 {
   "task_category": "Key-Value Storage as a Service",
   "attributes": {
+    "id": 1,
     "name": "S3 Storage"
   },
   "DeploymentScriptReferences": [
