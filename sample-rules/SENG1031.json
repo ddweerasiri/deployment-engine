@@ -1,0 +1,8 @@
+{
+  "attributes": {
+    "id": 2,
+    "name": "SENG1031 Course configuration"
+  },
+  "component-resource-ids": [1],
+  "DeploymentScriptReferences": []
+}
