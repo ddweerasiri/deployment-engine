@@ -1,9 +1,0 @@
-{
-  "task_category": "SENG1031",
-  "attributes": {
-    "id": 2,
-    "name": "SENG1031 Course configuration"
-  },
-  "component-resource-ids": [1],
-  "DeploymentScriptReferences": []
-}
