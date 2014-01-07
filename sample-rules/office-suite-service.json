@@ -1,0 +1,12 @@
+{
+  "attributes": {
+    "id": 5,
+    "name": "Office Suite"
+  },
+  "DeploymentScriptReferences": [
+    {
+      "provider": "Google Docs",
+      "link": "link to online request form in Google Apps Education website"
+    }
+  ]
+}
