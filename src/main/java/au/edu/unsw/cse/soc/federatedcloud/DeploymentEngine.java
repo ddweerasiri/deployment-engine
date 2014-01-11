@@ -18,6 +18,7 @@ package au.edu.unsw.cse.soc.federatedcloud;
 
 import au.edu.unsw.cse.soc.federatedcloud.connectors.AWSEC2Connector;
 import au.edu.unsw.cse.soc.federatedcloud.connectors.CloudResourceDeploymentConnector;
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -29,8 +30,11 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 /**
  * User: denis
@@ -57,8 +61,43 @@ public class DeploymentEngine {
         for(int i = 0; i < cloudResources.getLength(); i++) {
             Element cloudResource = (Element) cloudResources.item(i);
             String cloudResourceID = cloudResource.getAttribute("id");
+            CloudResourceDescription description = buildCouldResourceDescriptionFromJSON(cloudResourceID);
+
             CloudResourceDeploymentConnector connector = new AWSEC2Connector();
-            connector.deploy();
+            connector.deploy(description);
+        }
+    }
+
+    private static void readJSON() throws Exception {
+        String json = readUrl("http://www.javascriptkit.com/" + "dhtmltutors/javascriptkit.json");
+
+        Gson gson = new Gson();
+        CloudResourceDescription description = gson.fromJson(json, CloudResourceDescription.class);
+
+        logger.info("    " + description);
+    }
+
+    /**
+     * Download the given URL (as text)
+     * @param urlString
+     * @return
+     * @throws Exception
+     */
+    private static String readUrl(String urlString) throws Exception {
+        BufferedReader reader = null;
+        try {
+            URL url = new URL(urlString);
+            reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            StringBuffer buffer = new StringBuffer();
+            int read;
+            char[] chars = new char[1024];
+            while ((read = reader.read(chars)) != -1)
+                buffer.append(chars, 0, read);
+
+            return buffer.toString();
+        } finally {
+            if (reader != null)
+                reader.close();
         }
     }
 }

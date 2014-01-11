@@ -20,5 +20,5 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  * Generic interface for a cloud deployment connector
  */
 public interface CloudResourceDeploymentConnector {
-    public void deploy();
+    public void deploy(CloudResourceDescription description);
 }
