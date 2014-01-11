@@ -43,11 +43,11 @@ import java.net.URL;
 public class DeploymentEngine {
     private static final Logger logger = LoggerFactory.getLogger(DeploymentEngine.class);
 
-    public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
+    public static void main(String[] args) throws Exception {
         buildWorkflow();
     }
 
-    private static void buildWorkflow() throws ParserConfigurationException, IOException, SAXException {
+    private static void buildWorkflow() throws Exception {
         File file = new File("src/main/resources/workflow.xml");
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
                 .newInstance();
@@ -68,8 +68,22 @@ public class DeploymentEngine {
         }
     }
 
+    private static CloudResourceDescription buildCouldResourceDescriptionFromJSON(String cloudResourceID) throws Exception {
+        logger.warn("Not implemented yet");
+        readJSON();
+        return null;
+    }
+
     private static void readJSON() throws Exception {
-        String json = readUrl("http://www.javascriptkit.com/" + "dhtmltutors/javascriptkit.json");
+        //String json = readUrl("http://www.javascriptkit.com/" + "dhtmltutors/javascriptkit.json");
+        String json = "{\n" +
+                "  \"attributes\": {\n" +
+                "    \"id\": 2,\n" +
+                "    \"name\": \"SENG1031 Course configuration\"\n" +
+                "  },\n" +
+                "  \"componentResourceIDs\": [1,3,4,5,6],\n" +
+                "  \"deploymentScriptReferences\": []\n" +
+                "}\n";
 
         Gson gson = new Gson();
         CloudResourceDescription description = gson.fromJson(json, CloudResourceDescription.class);

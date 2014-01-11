@@ -3,10 +3,10 @@
     "id": 4,
     "name": "GUI Prototyping Service"
   },
-  "DeploymentScriptReferences": [
+  "deploymentScriptReferences": [
     {
       "provider": "LucidChart",
-      "link": "link to online request form in LucidChart website"
+      "reference": "link to online request form in LucidChart website"
     }
   ]
 }

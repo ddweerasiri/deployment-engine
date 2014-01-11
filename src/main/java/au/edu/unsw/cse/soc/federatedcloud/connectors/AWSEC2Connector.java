@@ -15,6 +15,7 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  * limitations under the License.
  */
 
+import au.edu.unsw.cse.soc.federatedcloud.CloudResourceDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +26,6 @@ import org.slf4j.LoggerFactory;
 public class AWSEC2Connector implements CloudResourceDeploymentConnector {
     private static final Logger logger = LoggerFactory.getLogger(AWSEC2Connector.class);
 
-    @Override
     public void deploy(CloudResourceDescription description) {
         logger.info("Deployment request received.");
     }

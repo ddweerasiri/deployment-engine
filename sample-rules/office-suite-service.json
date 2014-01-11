@@ -3,10 +3,10 @@
     "id": 5,
     "name": "Office Suite"
   },
-  "DeploymentScriptReferences": [
+  "deploymentScriptReferences": [
     {
       "provider": "Google Docs",
-      "link": "link to online request form in Google Apps Education website"
+      "reference": "link to online request form in Google Apps Education website"
     }
   ]
 }

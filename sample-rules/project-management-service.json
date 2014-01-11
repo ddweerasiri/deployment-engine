@@ -3,10 +3,10 @@
     "id": 3,
     "name": "Project Management Service"
   },
-  "DeploymentScriptReferences": [
+  "deploymentScriptReferences": [
     {
       "provider": "Pivotal Tracker",
-      "link": "link to Pivotal Tracker request form"
+      "reference": "link to Pivotal Tracker request form"
     }
   ]
 }

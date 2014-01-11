@@ -29,7 +29,12 @@ public class CloudResourceDescription {
     private static final Logger logger = LoggerFactory.getLogger(CloudResourceDescription.class);
 
     HashMap<String, String> attributes;
-    HashMap<String, String> scriptReferences;
+    HashSet<DeploymentScriptReference> deploymentScriptReferences;
     HashSet<Integer> componentResourceIDs;
 
+}
+
+class DeploymentScriptReference {
+    String provider;
+    String reference;
 }

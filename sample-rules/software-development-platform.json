@@ -3,10 +3,10 @@
     "id": 6,
     "name": "Software Development Platform"
   },
-  "DeploymentScriptReferences": [
+  "deploymentScriptReferences": [
     {
       "provider": "Heroku",
-      "link": "link to deployment process of a Heroku user account"
+      "reference": "link to deployment process of a Heroku user account"
     }
   ]
 }

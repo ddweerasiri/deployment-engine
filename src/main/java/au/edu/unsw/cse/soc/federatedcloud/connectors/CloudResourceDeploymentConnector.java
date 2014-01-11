@@ -15,6 +15,8 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  * limitations under the License.
  */
 
+import au.edu.unsw.cse.soc.federatedcloud.CloudResourceDescription;
+
 /**
  * User: denis
  * Generic interface for a cloud deployment connector
