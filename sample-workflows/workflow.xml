@@ -1,0 +1,11 @@
+<workflow>
+    <configuration>
+
+    </configuration>
+    <controlflow>
+        <sequential>
+            <resource id = "1" />
+            <resource id = "3" />
+        </sequential>
+    </controlflow>
+</workflow>
