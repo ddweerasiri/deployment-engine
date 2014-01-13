@@ -27,6 +27,6 @@ public class AWSEC2Connector implements CloudResourceDeploymentConnector {
     private static final Logger logger = LoggerFactory.getLogger(AWSEC2Connector.class);
 
     public void deploy(CloudResourceDescription description) {
-        logger.info("Deployment request received.");
+        logger.info("Deployment request received for description:" + description.getAttributes().get("id"));
     }
 }

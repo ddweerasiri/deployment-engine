@@ -3,6 +3,9 @@
     "id": 2,
     "name": "SENG1031 Course configuration"
   },
-  "componentResourceIDs": [1,3,4,5,6],
+  /*"componentResourceIDs": [1,3,4,5,6],*/
+  "controlFlow": {
+      "sequential" : [1,3,4,5,6]
+  },
   "deploymentScriptReferences": []
 }

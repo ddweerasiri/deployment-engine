@@ -19,22 +19,17 @@ package au.edu.unsw.cse.soc.federatedcloud;
 import au.edu.unsw.cse.soc.federatedcloud.connectors.AWSEC2Connector;
 import au.edu.unsw.cse.soc.federatedcloud.connectors.CloudResourceDeploymentConnector;
 import com.google.gson.Gson;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
+import java.util.regex.Pattern;
 
 /**
  * User: denis
@@ -44,11 +39,23 @@ public class DeploymentEngine {
     private static final Logger logger = LoggerFactory.getLogger(DeploymentEngine.class);
 
     public static void main(String[] args) throws Exception {
-        buildWorkflow();
+        File file = new File("sample-workflows/workflow.xml");
+        //deployWorkflow(file);
+        deployCloudResourceDescription(file);
+
     }
 
-    private static void buildWorkflow() throws Exception {
-        File file = new File("src/main/resources/workflow.xml");
+    private static void deployCloudResourceDescription(File file) {
+
+    }
+
+    /**
+     * Deploy a cloud resource configuration for a given workflow.xml
+     * @param file workflow definition file
+     * @throws Exception
+     */
+    private static void deployWorkflow(File file) throws Exception {
+
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
                 .newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -61,57 +68,86 @@ public class DeploymentEngine {
         for(int i = 0; i < cloudResources.getLength(); i++) {
             Element cloudResource = (Element) cloudResources.item(i);
             String cloudResourceID = cloudResource.getAttribute("id");
-            CloudResourceDescription description = buildCouldResourceDescriptionFromJSON(cloudResourceID);
+            CloudResourceDescription description = buildCouldResourceDescriptionFromJSON(Integer.parseInt(cloudResourceID));
 
             CloudResourceDeploymentConnector connector = new AWSEC2Connector();
             connector.deploy(description);
         }
     }
 
-    private static CloudResourceDescription buildCouldResourceDescriptionFromJSON(String cloudResourceID) throws Exception {
-        logger.warn("Not implemented yet");
-        readJSON();
-        return null;
+    private static CloudResourceDescription buildCouldResourceDescriptionFromJSON(int cloudResourceID) throws Exception {
+        return searchFolder("./sample-descriptions", Pattern.compile("(?i).*\\.json$"), cloudResourceID);
     }
 
-    private static void readJSON() throws Exception {
-        //String json = readUrl("http://www.javascriptkit.com/" + "dhtmltutors/javascriptkit.json");
-        String json = "{\n" +
-                "  \"attributes\": {\n" +
-                "    \"id\": 2,\n" +
-                "    \"name\": \"SENG1031 Course configuration\"\n" +
-                "  },\n" +
-                "  \"componentResourceIDs\": [1,3,4,5,6],\n" +
-                "  \"deploymentScriptReferences\": []\n" +
-                "}\n";
-
+    private static CloudResourceDescription readJSON(String json) throws Exception {
         Gson gson = new Gson();
-        CloudResourceDescription description = gson.fromJson(json, CloudResourceDescription.class);
-
-        logger.info("    " + description);
+        return gson.fromJson(json, CloudResourceDescription.class);
     }
 
     /**
-     * Download the given URL (as text)
-     * @param urlString
-     * @return
-     * @throws Exception
+     * Search for all the files in a particular path and process them one by one
+     * @param searchPath file location to be searched
+     * @param filePattern search criteria
      */
-    private static String readUrl(String urlString) throws Exception {
-        BufferedReader reader = null;
-        try {
-            URL url = new URL(urlString);
-            reader = new BufferedReader(new InputStreamReader(url.openStream()));
-            StringBuffer buffer = new StringBuffer();
-            int read;
-            char[] chars = new char[1024];
-            while ((read = reader.read(chars)) != -1)
-                buffer.append(chars, 0, read);
-
-            return buffer.toString();
-        } finally {
-            if (reader != null)
-                reader.close();
+    private static CloudResourceDescription searchFolder(String searchPath, Pattern filePattern, int cloudResourceDescriptionID) throws Exception {
+        File dir = new File(searchPath);
+        for(File item : dir.listFiles()){
+            if(item.isDirectory()){
+                //recursively search subdirectories
+                return searchFolder(item.getAbsolutePath(), filePattern, cloudResourceDescriptionID);
+            } else if(item.isFile() && filePattern.matcher(item.getName()).matches()){
+                CloudResourceDescription description = processFile(item);
+                boolean isEqual = isCorrectCloudResourceDescription(description, cloudResourceDescriptionID);
+                if (isEqual) {
+                    return description;
+                } /*else {
+                    String errorMsg = "Expected cloud resource description with \"id\": " + cloudResourceDescriptionID +
+                            " was not found in " + item.getName();
+                    RuntimeException ex = new RuntimeException(errorMsg);
+                    logger.error(errorMsg, ex);
+                    throw ex;
+                }*/
+            } else {
+                String errorMsg = "Expected cloud resource description with \"id\": " + cloudResourceDescriptionID +
+                        " was not found.";
+                RuntimeException ex = new RuntimeException(errorMsg);
+                logger.error(errorMsg, ex);
+                throw ex;
+            }
         }
+        throw new RuntimeException("No files found on the specified directory:" + searchPath);
+    }
+
+    /**
+     * The business logic to compare cloud resource description for a given id
+     * @param description cloud resource description object
+     * @param cloudResourceDescriptionID id to be search for the input cloud resource description object
+     * @return whether the ID of the input cloud resource description object is equal to the input {@code cloudResourceDescriptionID}
+     */
+    private static boolean isCorrectCloudResourceDescription(CloudResourceDescription description, int cloudResourceDescriptionID) {
+        int id = getIDOfCloudResourceDescription(description);
+        return id == cloudResourceDescriptionID;
+    }
+
+    private static int getIDOfCloudResourceDescription(CloudResourceDescription description) {
+        String id = description.attributes.get("id");
+        if (id == null || "".equals(id)) {
+            String errorMsg = "This cloud description does not have the \"id\" attribute. \n" + description;
+            RuntimeException ex =  new RuntimeException(errorMsg);
+            logger.error(errorMsg, ex);
+            throw ex;
+        } else {
+            return Integer.parseInt(id);
+        }
+
+    }
+
+    /**
+     * Process an file and returns the CloudResourceDescription
+     * @param aFile input file to be processed (must be a JSON file)
+     */
+    private static CloudResourceDescription processFile(File aFile) throws Exception {
+        String fileContent = FileUtils.readFileToString(aFile);
+        return readJSON(fileContent);
     }
 }

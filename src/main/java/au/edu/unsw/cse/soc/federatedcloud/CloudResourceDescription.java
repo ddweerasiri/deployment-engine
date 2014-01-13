@@ -28,6 +28,10 @@ import java.util.HashSet;
 public class CloudResourceDescription {
     private static final Logger logger = LoggerFactory.getLogger(CloudResourceDescription.class);
 
+    public HashMap<String, String> getAttributes() {
+        return attributes;
+    }
+
     HashMap<String, String> attributes;
     HashSet<DeploymentScriptReference> deploymentScriptReferences;
     HashSet<Integer> componentResourceIDs;
