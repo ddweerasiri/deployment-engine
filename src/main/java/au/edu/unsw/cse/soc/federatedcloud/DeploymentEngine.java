@@ -39,14 +39,17 @@ public class DeploymentEngine {
     private static final Logger logger = LoggerFactory.getLogger(DeploymentEngine.class);
 
     public static void main(String[] args) throws Exception {
-        File file = new File("sample-workflows/workflow.xml");
+        File file = new File("sample-descriptions/COMP9323.json");
         //deployWorkflow(file);
         deployCloudResourceDescription(file);
 
     }
 
     private static void deployCloudResourceDescription(File file) {
+        CloudResourceDescription description = buildCouldResourceDescriptionFromJSON(file);
 
+        CloudResourceDeploymentConnector connector = new AWSEC2Connector();
+        connector.deploy(description);
     }
 
     /**
