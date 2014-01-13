@@ -33,19 +33,31 @@ public class CloudResourceDescription {
     }
 
     HashMap<String, String> attributes;
+
+    public ControlFlow getControlFlow() {
+        return controlFlow;
+    }
+
     ControlFlow controlFlow;
     HashSet<DeploymentScriptReference> deploymentScriptReferences;
-
-    private class ControlFlow {
-        Behavior behavior;
-        HashSet<Integer> componentResourceIDs;
-    }
-
-    private enum Behavior {SEQUENTIAL, PARALLEL};
-
-    private class DeploymentScriptReference {
-        String provider;
-        String reference;
-    }
 }
 
+class ControlFlow {
+    public Behavior getDeploymentBehavior() {
+        return deploymentBehavior;
+    }
+
+    public HashSet<Integer> getComponentResourceIDs() {
+        return componentResourceIDs;
+    }
+
+    Behavior deploymentBehavior;
+    HashSet<Integer> componentResourceIDs;
+}
+
+enum Behavior {SEQUENTIAL, PARALLEL};
+
+class DeploymentScriptReference {
+    String provider;
+    String reference;
+}

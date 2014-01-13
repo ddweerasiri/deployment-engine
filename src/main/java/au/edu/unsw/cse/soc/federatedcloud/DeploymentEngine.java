@@ -29,6 +29,7 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.util.HashSet;
 import java.util.regex.Pattern;
 
 /**
@@ -39,45 +40,66 @@ public class DeploymentEngine {
     private static final Logger logger = LoggerFactory.getLogger(DeploymentEngine.class);
 
     public static void main(String[] args) throws Exception {
-        File file = new File("sample-descriptions/COMP9323.json");
+        File file = new File("sample-descriptions/SENG1031.json");
         //deployWorkflow(file);
         deployCloudResourceDescription(file);
 
     }
 
-    private static void deployCloudResourceDescription(File file) {
+    /**
+     * Deploy a cloud resources configuration for a given JSON file which specifies a cloud resource description
+     * @param file JSON file which specifies a cloud resource description
+     * @throws Exception
+     */
+    private static void deployCloudResourceDescription(File file) throws Exception {
         CloudResourceDescription description = buildCouldResourceDescriptionFromJSON(file);
 
-        CloudResourceDeploymentConnector connector = new AWSEC2Connector();
-        connector.deploy(description);
+        deployCloudResourceDescription(description);
     }
 
     /**
-     * Deploy a cloud resource configuration for a given workflow.xml
-     * @param file workflow definition file
+     * Deploy a cloud resources configuration for a given {@code CloudResourceDescription}
+     * @param description object of {@code CloudResourceDescription}
      * @throws Exception
      */
-    private static void deployWorkflow(File file) throws Exception {
+    private static void deployCloudResourceDescription(CloudResourceDescription description) throws Exception {
+        Behavior behavior = description.getControlFlow().getDeploymentBehavior();
+        HashSet<Integer> componentResourceIDs = description.getControlFlow().getComponentResourceIDs();
 
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
-                .newInstance();
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        Document document = documentBuilder.parse(file);
-
-        Element controlflow = (Element) document.getElementsByTagName("controlflow").item(0);
-        Element sequential = (Element) controlflow.getElementsByTagName("sequential").item(0);
-        NodeList cloudResources = sequential.getElementsByTagName("resource");
-
-        for(int i = 0; i < cloudResources.getLength(); i++) {
-            Element cloudResource = (Element) cloudResources.item(i);
-            String cloudResourceID = cloudResource.getAttribute("id");
-            CloudResourceDescription description = buildCouldResourceDescriptionFromJSON(Integer.parseInt(cloudResourceID));
-
-            CloudResourceDeploymentConnector connector = new AWSEC2Connector();
-            connector.deploy(description);
+        logger.warn("Deployment behavior is still not integrated to the deployment logic.");
+        for(Integer componentID : componentResourceIDs) {
+            deployCloudResourceDescription(componentID);
         }
     }
 
+    /**
+     * Deploy a cloud resource for a given id
+     * @param componentID
+     */
+    private static void deployCloudResourceDescription(int componentID) throws Exception {
+        CloudResourceDescription description = buildCouldResourceDescriptionFromJSON(componentID);
+
+        CloudResourceDeploymentConnector connector = new AWSEC2Connector();
+        connector.deploy(description);
+
+    }
+
+    /**
+     * Build a {@code CloudResourceDescription} from the JSON file
+     * @param file the JSON model of the cloud resource description
+     * @return an object of {@code CloudResourceDescription}
+     * @throws Exception
+     */
+    private static CloudResourceDescription buildCouldResourceDescriptionFromJSON(File file) throws Exception {
+        return processFile(file);
+    }
+
+    /**
+     * Build a {@code CloudResourceDescription} for a given ID of a cloud resource description
+     * @param cloudResourceID
+     * @return an object of {@code CloudResourceDescription}
+     * @throws Exception
+     */
     private static CloudResourceDescription buildCouldResourceDescriptionFromJSON(int cloudResourceID) throws Exception {
         return searchFolder("./sample-descriptions", Pattern.compile("(?i).*\\.json$"), cloudResourceID);
     }
@@ -103,13 +125,7 @@ public class DeploymentEngine {
                 boolean isEqual = isCorrectCloudResourceDescription(description, cloudResourceDescriptionID);
                 if (isEqual) {
                     return description;
-                } /*else {
-                    String errorMsg = "Expected cloud resource description with \"id\": " + cloudResourceDescriptionID +
-                            " was not found in " + item.getName();
-                    RuntimeException ex = new RuntimeException(errorMsg);
-                    logger.error(errorMsg, ex);
-                    throw ex;
-                }*/
+                }
             } else {
                 String errorMsg = "Expected cloud resource description with \"id\": " + cloudResourceDescriptionID +
                         " was not found.";
@@ -132,6 +148,11 @@ public class DeploymentEngine {
         return id == cloudResourceDescriptionID;
     }
 
+    /**
+     * Extract the ID of a cloud resource description
+     * @param description an object of {@code CloudResourceDescription}
+     * @return the ID of the given cloud resource description
+     */
     private static int getIDOfCloudResourceDescription(CloudResourceDescription description) {
         String id = description.attributes.get("id");
         if (id == null || "".equals(id)) {
