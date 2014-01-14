@@ -18,26 +18,33 @@ package au.edu.unsw.cse.soc.federatedcloud;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 /**
  * User: denis
- * Represent the Data model of a Cloud resource
+ * Represent the composition of a set of cloud resources (aka Composite resource)
  */
-public class CloudResourceDescription {
-    private static final Logger logger = LoggerFactory.getLogger(CloudResourceDescription.class);
+public class CloudResourcesComposition {
+    private static final Logger logger = LoggerFactory.getLogger(CloudResourcesComposition.class);
 
-    public HashMap<String, String> getAttributes() {
-        return attributes;
+    public ControlFlow getControlFlow() {
+        return controlFlow;
     }
 
-    HashMap<String, String> attributes;
-
-    HashSet<DeploymentScriptReference> deploymentScriptReferences;
+    ControlFlow controlFlow;
 }
 
-class DeploymentScriptReference {
-    String provider;
-    String reference;
+class ControlFlow {
+    public Behavior getDeploymentBehavior() {
+        return deploymentBehavior;
+    }
+
+    public HashSet<Integer> getComponentResourceIDs() {
+        return componentResourceIDs;
+    }
+
+    Behavior deploymentBehavior;
+    HashSet<Integer> componentResourceIDs;
 }
+
+enum Behavior {SEQUENTIAL, PARALLEL};
