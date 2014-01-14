@@ -34,7 +34,7 @@ public class DeploymentEngine {
 
     public static void main(String[] args) throws Exception {
         File file = new File("sample-descriptions/SENG1031.json");
-        //deployWorkflow(file);
+
         DeploymentEngine engine = new DeploymentEngine();
         engine.deployCloudResourceDescription(file);
 
