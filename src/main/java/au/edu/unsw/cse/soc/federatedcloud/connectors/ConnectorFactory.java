@@ -15,6 +15,7 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  * limitations under the License.
  */
 
+import au.edu.unsw.cse.soc.federatedcloud.datamodel.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +27,7 @@ public class ConnectorFactory {
     private static final Logger logger = LoggerFactory.getLogger(ConnectorFactory.class);
 
     public static CloudResourceDeploymentConnector build(String provider) throws Exception {
-        if ("CloudResourceBase".equals(provider)) {
+        if (Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME.equals(provider)) {
             return new CloudBaseDeploymentConnector();
         } else if ("Pivotal Tracker".equals(provider)) {
             throw new Exception("Connector class is not implemented for the provider:\"" +  provider + "\".");

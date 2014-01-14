@@ -19,6 +19,7 @@ package au.edu.unsw.cse.soc.federatedcloud;
 import au.edu.unsw.cse.soc.federatedcloud.connectors.CloudResourceDeploymentConnector;
 import au.edu.unsw.cse.soc.federatedcloud.connectors.ConnectorFactory;
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.CloudResourceDescription;
+import au.edu.unsw.cse.soc.federatedcloud.datamodel.Constants;
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.DeploymentScriptReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,10 +60,10 @@ public class DeploymentEngine {
     public void deployCloudResourceDescription(CloudResourceDescription description) throws Exception {
         DeploymentScriptReference deploymentReference;
         try {
-            //check whether the cloud resource has the provider named "CloudResourceBase", which is used to deploy the composite resources
-            deploymentReference = description.getDeploymentScriptReference("CloudResourceBase");
+            //check whether the cloud resource has the provider named {@code Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME}, which is used to deploy the composite resources
+            deploymentReference = description.getDeploymentScriptReference(Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME);
         } catch (RuntimeException rex) {
-            //if the provider named "CloudResourceBase" does not exist, one of other deployment script references is used
+            //if the provider named {@code Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME} does not exist, one of other deployment script references is used
             deploymentReference = description.getDeploymentScriptReference();
         }
 

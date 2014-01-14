@@ -17,10 +17,7 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
 
 import au.edu.unsw.cse.soc.federatedcloud.DataModelUtil;
 import au.edu.unsw.cse.soc.federatedcloud.DeploymentEngine;
-import au.edu.unsw.cse.soc.federatedcloud.datamodel.Behavior;
-import au.edu.unsw.cse.soc.federatedcloud.datamodel.CloudResourceDescription;
-import au.edu.unsw.cse.soc.federatedcloud.datamodel.CloudResourcesComposition;
-import au.edu.unsw.cse.soc.federatedcloud.datamodel.DeploymentScriptReference;
+import au.edu.unsw.cse.soc.federatedcloud.datamodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,15 +33,38 @@ public class CloudBaseDeploymentConnector implements CloudResourceDeploymentConn
     private static final Logger logger = LoggerFactory.getLogger(CloudBaseDeploymentConnector.class);
 
     public void deploy(CloudResourceDescription description) throws IOException {
-        DeploymentScriptReference reference = description.getDeploymentScriptReference("CloudResourceBase");
+        DeploymentScriptReference reference = description.getDeploymentScriptReference(Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME);
         File deploymentWorkflowScriptFile = new File(reference.getReference());
         CloudResourcesComposition compositionWorkflow = DataModelUtil.buildCompositionWorkflowFromFile(deploymentWorkflowScriptFile);
 
         Behavior behavior = compositionWorkflow.getControlFlow().getDeploymentBehavior();
         HashSet<Integer> componentResourceIDs = compositionWorkflow.getControlFlow().getComponentResourceIDs();
 
-        logger.warn("Deployment behavior is still not integrated to the deployment logic.");
-        for(Integer componentID : componentResourceIDs) {
+        deployComponentResources(behavior, componentResourceIDs);
+    }
+
+    private void deployComponentResources(Behavior deploymentBehavior, HashSet<Integer> componentResourceIDs) {
+        if (deploymentBehavior.equals(Behavior.SEQUENTIAL)) {
+            for(Integer componentID : componentResourceIDs) {
+                DeploymentEngineLoop engineLoop = new DeploymentEngineLoop(componentID);
+                engineLoop.run();                                        // Single thread implementation
+            }
+        } else if (deploymentBehavior.equals(Behavior.PARALLEL)) {
+            for(Integer componentID : componentResourceIDs) {
+                Thread engineLoop = new Thread(new DeploymentEngineLoop(componentID));
+                engineLoop.start();                                     // Multiple thread implementation
+            }
+        }
+    }
+
+    private class DeploymentEngineLoop implements Runnable {
+        private int componentID;
+
+        private DeploymentEngineLoop(int componentID) {
+            this.componentID = componentID;
+        }
+
+        public void run() {
             DeploymentEngine engine = new DeploymentEngine();
             try {
                 engine.deployCloudResourceDescription(componentID);
