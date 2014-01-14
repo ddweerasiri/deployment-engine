@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud.connectors;
+package au.edu.unsw.cse.soc.federatedcloud.datamodel;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -15,18 +15,4 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  * limitations under the License.
  */
 
-import au.edu.unsw.cse.soc.federatedcloud.CloudResourceDescription;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-/**
- * User: denis
- * Connector for AWS EC2 cloud
- */
-public class AWSEC2Connector implements CloudResourceDeploymentConnector {
-    private static final Logger logger = LoggerFactory.getLogger(AWSEC2Connector.class);
-
-    public void deploy(CloudResourceDescription description) {
-        logger.info("Deployment request received for description:" + description.getAttributes().get("id"));
-    }
-}
+public enum Behavior {SEQUENTIAL, PARALLEL}

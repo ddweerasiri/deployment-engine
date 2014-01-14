@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud.connectors;
+package au.edu.unsw.cse.soc.federatedcloud.datamodel;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -15,12 +15,21 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  * limitations under the License.
  */
 
-import au.edu.unsw.cse.soc.federatedcloud.datamodel.CloudResourceDescription;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * User: denis
- * Generic interface for a cloud deployment connector
+ * Represent the composition of a set of cloud resources (aka Composite resource)
  */
-public interface CloudResourceDeploymentConnector {
-    public void deploy(CloudResourceDescription description) throws Exception;
+public class CloudResourcesComposition {
+    private static final Logger logger = LoggerFactory.getLogger(CloudResourcesComposition.class);
+
+    public ControlFlow getControlFlow() {
+        return controlFlow;
+    }
+
+    ControlFlow controlFlow;
 }
+
+;

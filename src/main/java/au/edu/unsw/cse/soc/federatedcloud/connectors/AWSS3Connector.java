@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud;
+package au.edu.unsw.cse.soc.federatedcloud.connectors;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -15,29 +15,18 @@ package au.edu.unsw.cse.soc.federatedcloud;
  * limitations under the License.
  */
 
+import au.edu.unsw.cse.soc.federatedcloud.datamodel.CloudResourceDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.HashSet;
-
 /**
  * User: denis
- * Represent the Data model of a Cloud resource
+ * Connector for AWS EC2 cloud
  */
-public class CloudResourceDescription {
-    private static final Logger logger = LoggerFactory.getLogger(CloudResourceDescription.class);
+public class AWSS3Connector implements CloudResourceDeploymentConnector {
+    private static final Logger logger = LoggerFactory.getLogger(AWSS3Connector.class);
 
-    public HashMap<String, String> getAttributes() {
-        return attributes;
+    public void deploy(CloudResourceDescription description) throws Exception {
+        logger.info("Deployment request received for description:" + description.getAttributes().get("id"));
     }
-
-    HashMap<String, String> attributes;
-
-    HashSet<DeploymentScriptReference> deploymentScriptReferences;
-}
-
-class DeploymentScriptReference {
-    String provider;
-    String reference;
 }

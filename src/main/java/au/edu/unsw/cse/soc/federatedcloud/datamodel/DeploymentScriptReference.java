@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud.connectors;
+package au.edu.unsw.cse.soc.federatedcloud.datamodel;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -15,12 +15,20 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  * limitations under the License.
  */
 
-import au.edu.unsw.cse.soc.federatedcloud.datamodel.CloudResourceDescription;
-
 /**
  * User: denis
- * Generic interface for a cloud deployment connector
+ * Represent the Deployment script reference of a Cloud resource
  */
-public interface CloudResourceDeploymentConnector {
-    public void deploy(CloudResourceDescription description) throws Exception;
+public class DeploymentScriptReference {
+    public String getProvider() {
+        return provider;
+    }
+
+    private String provider;
+
+    public String getReference() {
+        return reference;
+    }
+
+    private String reference;
 }

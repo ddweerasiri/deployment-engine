@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud;
+package au.edu.unsw.cse.soc.federatedcloud.datamodel;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -15,26 +15,9 @@ package au.edu.unsw.cse.soc.federatedcloud;
  * limitations under the License.
  */
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.HashSet;
 
-/**
- * User: denis
- * Represent the composition of a set of cloud resources (aka Composite resource)
- */
-public class CloudResourcesComposition {
-    private static final Logger logger = LoggerFactory.getLogger(CloudResourcesComposition.class);
-
-    public ControlFlow getControlFlow() {
-        return controlFlow;
-    }
-
-    ControlFlow controlFlow;
-}
-
-class ControlFlow {
+public class ControlFlow {
     public Behavior getDeploymentBehavior() {
         return deploymentBehavior;
     }
@@ -46,5 +29,3 @@ class ControlFlow {
     Behavior deploymentBehavior;
     HashSet<Integer> componentResourceIDs;
 }
-
-enum Behavior {SEQUENTIAL, PARALLEL};
