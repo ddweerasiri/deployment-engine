@@ -15,8 +15,8 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  * limitations under the License.
  */
 
+import au.edu.unsw.cse.soc.federatedcloud.CloudResourceBaseDeploymentEngine;
 import au.edu.unsw.cse.soc.federatedcloud.DataModelUtil;
-import au.edu.unsw.cse.soc.federatedcloud.DeploymentEngine;
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +65,7 @@ public class CloudBaseDeploymentConnector implements CloudResourceDeploymentConn
         }
 
         public void run() {
-            DeploymentEngine engine = new DeploymentEngine();
+            CloudResourceBaseDeploymentEngine engine = new CloudResourceBaseDeploymentEngine();
             try {
                 engine.deployCloudResourceDescription(componentID);
             } catch (Exception e) {

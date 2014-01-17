@@ -30,13 +30,13 @@ import java.io.File;
  * User: denis
  * Interpret a workflow xml and execute actions
  */
-public class DeploymentEngine {
-    private static final Logger logger = LoggerFactory.getLogger(DeploymentEngine.class);
+public class CloudResourceBaseDeploymentEngine {
+    private static final Logger logger = LoggerFactory.getLogger(CloudResourceBaseDeploymentEngine.class);
 
     public static void main(String[] args) throws Exception {
-        File file = new File("sample-descriptions/SENG1031.json");
+        File file = new File("sample-descriptions/SENG1031.json");   // cloud resource to be deployed as the input
 
-        DeploymentEngine engine = new DeploymentEngine();
+        CloudResourceBaseDeploymentEngine engine = new CloudResourceBaseDeploymentEngine();
         engine.deployCloudResourceDescription(file);
 
     }
