@@ -6,7 +6,7 @@
   "deploymentScriptReferences": [
     {
       "provider": "CloudResourceBase",
-      "reference": "./sample-workflows/SENG1031-composition-workflow.json"
+      "reference": "./cloud-resource-base/associated-workflows/SENG1031-composition-workflow.json"
     }
   ]
 }

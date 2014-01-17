@@ -6,7 +6,7 @@
     "deploymentScriptReferences": [
         {
             "provider": "CloudResourceBase",
-            "reference": "./sample-workflows/COMP9323-composition-workflow.json"
+            "reference": "./cloud-resource-base/associated-workflows/COMP9323-composition-workflow.json"
         }
     ]
 }
