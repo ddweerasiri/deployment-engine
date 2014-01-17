@@ -1,11 +1,11 @@
 {
-    "id": 2,
+    "id": 4,
     "condition": {
-        "task_category": "SENG1031"
+        "task_category": ["Courses"]
     },
     "conclusion": {
-        "cloud_resource_description_ids": [2]
+        "cloud_resource_description_ids": [2,7]
     },
-    "except_node_id": null,
-    "false_node_id": 3
+    "except_node_id": ,
+    "false_node_id":
 }
