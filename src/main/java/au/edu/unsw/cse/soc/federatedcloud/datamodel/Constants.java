@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  * User: denis
  * Maintains some constants used across multiple classes
  */
-public class Constants {
+public final class Constants {
     private static final Logger log = LoggerFactory.getLogger(Constants.class);
 
     public static final String CLOUD_RESOURCE_BASE_PROVIDER_NAME = "CloudResourceBase";
