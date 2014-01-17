@@ -1,4 +1,11 @@
 {
-  "task_category": "SENG1031",
-  "cloud_resource_description_id": "2"
+    "id": 2,
+    "condition": {
+        "task_category": "SENG1031"
+    },
+    "conclusion": {
+        "cloud_resource_description_ids": [2]
+    },
+    "except_node_id": null,
+    "false_node_id": 3
 }

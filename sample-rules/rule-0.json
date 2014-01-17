@@ -1,4 +1,11 @@
 {
-    "task_category": null,
-    "cloud_resource_description_id": null
+    "id": 0,
+    "condition": {
+        "task_category": null
+    },
+    "conclusion": {
+        "cloud_resource_description_ids": null
+    },
+    "except_node_id": 1,
+    "false_node_id": null
 }

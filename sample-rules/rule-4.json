@@ -1,0 +1,11 @@
+{
+    "id": 4,
+    "condition": {
+        "task_category": "Courses"
+    },
+    "conclusion": {
+        "cloud_resource_description_ids": [2,7]
+    },
+    "except_node_id": null,
+    "false_node_id": null
+}

@@ -1,0 +1,11 @@
+{
+    "id": 3,
+    "condition": {
+        "task_category": "COMP9323"
+    },
+    "conclusion": {
+        "cloud_resource_description_ids": [7]
+    },
+    "except_node_id": null,
+    "false_node_id": 4
+}
