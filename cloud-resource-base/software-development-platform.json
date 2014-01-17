@@ -1,12 +1,13 @@
 {
-  "attributes": {
-    "id": 6,
-    "name": "Software Development Platform"
-  },
-  "deploymentScriptReferences": [
-    {
-      "provider": "Heroku",
-      "reference": "link to deployment process of a Heroku user account"
-    }
-  ]
+    "attributes": {
+        "id": 6,
+        "name": "Software Development Platform",
+        "allocated_number_of_students": 65
+    },
+    "deploymentScriptReferences": [
+        {
+            "provider": "Heroku",
+            "reference": "link to deployment process of a Heroku user account"
+        }
+    ]
 }

@@ -1,12 +1,13 @@
 {
-  "attributes": {
-    "id": 2,
-    "name": "SENG1031 Course configuration"
-  },
-  "deploymentScriptReferences": [
-    {
-      "provider": "CloudResourceBase",
-      "reference": "./cloud-resource-base/associated-workflows/SENG1031-composition-workflow.json"
-    }
-  ]
+    "attributes": {
+        "id": 2,
+        "name": "SENG1031 Course configuration",
+        "allocated_number_of_students": 65
+    },
+    "deploymentScriptReferences": [
+        {
+            "provider": "CloudResourceBase",
+            "reference": "./cloud-resource-base/associated-workflows/SENG1031-composition-workflow.json"
+        }
+    ]
 }

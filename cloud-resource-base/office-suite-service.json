@@ -1,12 +1,12 @@
 {
-  "attributes": {
-    "id": 5,
-    "name": "Office Suite"
-  },
-  "deploymentScriptReferences": [
-    {
-      "provider": "Google Docs",
-      "reference": "link to online request form in Google Apps Education website"
-    }
-  ]
+    "attributes": {
+        "id": 5,
+        "name": "Office Suite"
+    },
+    "deploymentScriptReferences": [
+        {
+            "provider": "Google Docs",
+            "reference": "link to online request form in Google Apps Education website"
+        }
+    ]
 }

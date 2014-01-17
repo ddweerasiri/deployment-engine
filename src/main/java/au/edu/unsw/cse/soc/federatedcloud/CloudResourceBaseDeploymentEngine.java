@@ -43,6 +43,7 @@ public class CloudResourceBaseDeploymentEngine {
 
     /**
      * Deploy a cloud resources configuration for a given JSON file which specifies a cloud resource description
+     *
      * @param file JSON file which specifies a cloud resource description
      * @throws Exception
      */
@@ -54,6 +55,7 @@ public class CloudResourceBaseDeploymentEngine {
 
     /**
      * Deploy a cloud resources configuration for a given {@code CloudResourceDescription}
+     *
      * @param description object of {@code CloudResourceDescription}
      * @throws Exception
      */
@@ -73,6 +75,7 @@ public class CloudResourceBaseDeploymentEngine {
 
     /**
      * Deploy a cloud resource for a given id
+     *
      * @param componentID ID of a cloud resource description
      */
     public void deployCloudResourceDescription(int componentID) throws Exception {

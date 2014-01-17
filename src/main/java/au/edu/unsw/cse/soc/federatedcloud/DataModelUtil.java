@@ -35,6 +35,7 @@ public class DataModelUtil {
 
     /**
      * Process an file and returns the CloudResourceDescription
+     *
      * @param aFile input file to be processed (must be a JSON file)
      */
     private static CloudResourceDescription processFile(File aFile) throws Exception {
@@ -44,6 +45,7 @@ public class DataModelUtil {
 
     /**
      * Build a {@code CloudResourceDescription} for a given ID of a cloud resource description
+     *
      * @param cloudResourceID ID of a cloud resource description
      * @return an object of {@code CloudResourceDescription}
      * @throws Exception
@@ -54,16 +56,17 @@ public class DataModelUtil {
 
     /**
      * Search for all the files in a particular path and process them one by one
-     * @param searchPath file location to be searched
+     *
+     * @param searchPath  file location to be searched
      * @param filePattern search criteria
      */
     private static CloudResourceDescription searchFolder(String searchPath, Pattern filePattern, int cloudResourceDescriptionID) throws Exception {
         File dir = new File(searchPath);
-        for(File item : dir.listFiles()){
-            if(item.isDirectory()){
+        for (File item : dir.listFiles()) {
+            if (item.isDirectory()) {
                 //recursively search subdirectories
                 return searchFolder(item.getAbsolutePath(), filePattern, cloudResourceDescriptionID);
-            } else if(item.isFile() && filePattern.matcher(item.getName()).matches()){
+            } else if (item.isFile() && filePattern.matcher(item.getName()).matches()) {
                 CloudResourceDescription description = processFile(item);
                 boolean isEqual = description.isCorrectCloudResourceDescription(cloudResourceDescriptionID);
                 if (isEqual) {
@@ -87,6 +90,7 @@ public class DataModelUtil {
 
     /**
      * Build a {@code CloudResourceDescription} from the JSON file
+     *
      * @param file the JSON model of the cloud resource description
      * @return an object of {@code CloudResourceDescription}
      * @throws Exception

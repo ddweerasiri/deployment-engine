@@ -1,12 +1,12 @@
 {
-  "attributes": {
-    "id": 4,
-    "name": "GUI Prototyping Service"
-  },
-  "deploymentScriptReferences": [
-    {
-      "provider": "LucidChart",
-      "reference": "link to online request form in LucidChart website"
-    }
-  ]
+    "attributes": {
+        "id": 4,
+        "name": "GUI Prototyping Service"
+    },
+    "deploymentScriptReferences": [
+        {
+            "provider": "LucidChart",
+            "reference": "link to online request form in LucidChart website"
+        }
+    ]
 }

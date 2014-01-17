@@ -1,7 +1,8 @@
 {
     "attributes": {
         "id": 7,
-        "name": "COMP9323 Course configuration"
+        "name": "COMP9323 Course configuration",
+        "allocated_number_of_students": 65
     },
     "deploymentScriptReferences": [
         {

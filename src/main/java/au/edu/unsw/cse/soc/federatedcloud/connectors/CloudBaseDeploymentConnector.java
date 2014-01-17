@@ -45,12 +45,12 @@ public class CloudBaseDeploymentConnector implements CloudResourceDeploymentConn
 
     private void deployComponentResources(Behavior deploymentBehavior, HashSet<Integer> componentResourceIDs) {
         if (deploymentBehavior.equals(Behavior.SEQUENTIAL)) {
-            for(Integer componentID : componentResourceIDs) {
+            for (Integer componentID : componentResourceIDs) {
                 DeploymentEngineLoop engineLoop = new DeploymentEngineLoop(componentID);
                 engineLoop.run();                                        // Single thread implementation
             }
         } else if (deploymentBehavior.equals(Behavior.PARALLEL)) {
-            for(Integer componentID : componentResourceIDs) {
+            for (Integer componentID : componentResourceIDs) {
                 Thread engineLoop = new Thread(new DeploymentEngineLoop(componentID));
                 engineLoop.start();                                     // Multiple thread implementation
             }

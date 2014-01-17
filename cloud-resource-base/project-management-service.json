@@ -1,12 +1,13 @@
 {
-  "attributes": {
-    "id": 3,
-    "name": "Project Management Service"
-  },
-  "deploymentScriptReferences": [
-    {
-      "provider": "Pivotal Tracker",
-      "reference": "link to Pivotal Tracker request form"
-    }
-  ]
+    "attributes": {
+        "id": 3,
+        "name": "Project Management Service",
+        "allocated_number_of_users": 55
+    },
+    "deploymentScriptReferences": [
+        {
+            "provider": "Pivotal Tracker",
+            "reference": "link to Pivotal Tracker request form"
+        }
+    ]
 }

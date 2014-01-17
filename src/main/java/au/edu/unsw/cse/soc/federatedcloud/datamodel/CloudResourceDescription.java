@@ -41,6 +41,7 @@ public class CloudResourceDescription {
 
     /**
      * Extract the deployment script reference of a specific provider from the cloud resource description
+     *
      * @param provider
      * @return
      */
@@ -51,13 +52,14 @@ public class CloudResourceDescription {
                 return scriptReference;
             }
         }
-        throw new RuntimeException("Deployment Reference by Provider \""+ provider + "\" was no found.");
+        throw new RuntimeException("Deployment Reference by Provider \"" + provider + "\" was no found.");
 
     }
 
     /**
      * Extract the deployment script reference from the cloud resource description. (When there are multiple providers,
      * only the first provider is returned)
+     *
      * @return
      */
     public DeploymentScriptReference getDeploymentScriptReference() {
@@ -72,13 +74,14 @@ public class CloudResourceDescription {
 
     /**
      * Extract the ID of the cloud resource description
+     *
      * @return the ID of the given cloud resource description
      */
     public int getIDOfCloudResourceDescription() {
         String id = attributes.get("id");
         if (id == null || "".equals(id)) {
             String errorMsg = "This cloud description does not have the \"id\" attribute. \n" + this;
-            RuntimeException ex =  new RuntimeException(errorMsg);
+            RuntimeException ex = new RuntimeException(errorMsg);
             logger.error(errorMsg, ex);
             throw ex;
         } else {
@@ -89,6 +92,7 @@ public class CloudResourceDescription {
 
     /**
      * The business logic to compare cloud resource description for a given id
+     *
      * @param cloudResourceDescriptionID id to be search for the input cloud resource description object
      * @return whether the ID of the input cloud resource description object is equal to the input {@code cloudResourceDescriptionID}
      */
