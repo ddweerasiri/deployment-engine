@@ -15,19 +15,21 @@ package au.edu.unsw.cse.soc.federatedcloud.datamodel;
  * limitations under the License.
  */
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * User: denis
- * Represent the composition of a set of cloud resources (aka Composite resource)
+ * Represent the Deployment script deploymentWorkflow of a Cloud resource
  */
-public class CloudResourcesComposition {
-    private static final Logger logger = LoggerFactory.getLogger(CloudResourcesComposition.class);
+public class Provider {
+    private String name;
+    private CloudResourcesComposition deploymentWorkflow;
 
-    public ControlFlow getControlFlow() {
-        return controlFlow;
+    public String getName() {
+        return name;
     }
 
-    ControlFlow controlFlow;
+    public CloudResourcesComposition getDeploymentWorkflow() {
+        return deploymentWorkflow;
+    }
+
+
 }

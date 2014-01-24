@@ -51,7 +51,7 @@ public class DataModelUtil {
      * @throws Exception
      */
     public static CloudResourceDescription buildCouldResourceDescriptionFromJSON(int cloudResourceID) throws Exception {
-        return searchFolder("./sample-descriptions", Pattern.compile("(?i).*\\.json$"), cloudResourceID);
+        return searchFolder("./cloud-resource-base", Pattern.compile("(?i).*\\.json$"), cloudResourceID);
     }
 
     /**
@@ -62,6 +62,7 @@ public class DataModelUtil {
      */
     private static CloudResourceDescription searchFolder(String searchPath, Pattern filePattern, int cloudResourceDescriptionID) throws Exception {
         File dir = new File(searchPath);
+        System.out.println(dir.getAbsolutePath());
         for (File item : dir.listFiles()) {
             if (item.isDirectory()) {
                 //recursively search subdirectories
@@ -97,11 +98,5 @@ public class DataModelUtil {
      */
     public static CloudResourceDescription buildCouldResourceDescriptionFromJSON(File file) throws Exception {
         return processFile(file);
-    }
-
-    public static CloudResourcesComposition buildCompositionWorkflowFromFile(File deploymentWorkflowScriptFile) throws IOException {
-        String fileContent = FileUtils.readFileToString(deploymentWorkflowScriptFile);
-        Gson gson = new Gson();
-        return gson.fromJson(fileContent, CloudResourcesComposition.class);
     }
 }

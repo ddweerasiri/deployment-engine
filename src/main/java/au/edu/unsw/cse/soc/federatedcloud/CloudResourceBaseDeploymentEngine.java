@@ -20,7 +20,7 @@ import au.edu.unsw.cse.soc.federatedcloud.connectors.CloudResourceDeploymentConn
 import au.edu.unsw.cse.soc.federatedcloud.connectors.ConnectorFactory;
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.CloudResourceDescription;
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.Constants;
-import au.edu.unsw.cse.soc.federatedcloud.datamodel.DeploymentScriptReference;
+import au.edu.unsw.cse.soc.federatedcloud.datamodel.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +34,9 @@ public class CloudResourceBaseDeploymentEngine {
     private static final Logger logger = LoggerFactory.getLogger(CloudResourceBaseDeploymentEngine.class);
 
     public static void main(String[] args) throws Exception {
-        File file = new File("sample-descriptions/SENG1031.json");   // cloud resource to be deployed as the input
+        File file = new File("cloud-resource-base/SENG1031.json");   // cloud resource to be deployed as the input
+        //File file = new File("cloud-resource-base/computing-server.json");   // cloud resource to be deployed as the input
+        //File file = new File("cloud-resource-base/key-value-storage-service.json");   // cloud resource to be deployed as the input
 
         CloudResourceBaseDeploymentEngine engine = new CloudResourceBaseDeploymentEngine();
         engine.deployCloudResourceDescription(file);
@@ -60,16 +62,16 @@ public class CloudResourceBaseDeploymentEngine {
      * @throws Exception
      */
     public void deployCloudResourceDescription(CloudResourceDescription description) throws Exception {
-        DeploymentScriptReference deploymentReference;
+        Provider provider;
         try {
             //check whether the cloud resource has the provider named {@code Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME}, which is used to deploy the composite resources
-            deploymentReference = description.getDeploymentScriptReference(Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME);
+            provider = description.getProvider(Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME);
         } catch (RuntimeException rex) {
-            //if the provider named {@code Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME} does not exist, one of other deployment script references is used
-            deploymentReference = description.getDeploymentScriptReference();
+            //if the provider named {@code Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME} does not exist, one of other provider is used
+            provider = description.getProvider();
         }
 
-        CloudResourceDeploymentConnector connector = ConnectorFactory.build(deploymentReference.getProvider());
+        CloudResourceDeploymentConnector connector = ConnectorFactory.build(provider.getName());
         connector.deploy(description);
     }
 

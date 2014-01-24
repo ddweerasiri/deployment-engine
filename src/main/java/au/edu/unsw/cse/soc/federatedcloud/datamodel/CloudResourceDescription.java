@@ -35,42 +35,42 @@ public class CloudResourceDescription {
 
     HashMap<String, String> attributes;
 
-    public HashSet<DeploymentScriptReference> getDeploymentScriptReferences() {
-        return deploymentScriptReferences;
+    public HashSet<Provider> getProviders() {
+        return providers;
     }
 
     /**
-     * Extract the deployment script reference of a specific provider from the cloud resource description
+     * Extract the Provider with a specific providerName from the cloud resource description
      *
-     * @param provider
+     * @param providerName
      * @return
      */
-    public DeploymentScriptReference getDeploymentScriptReference(String provider) {
-        for (Iterator<DeploymentScriptReference> it = deploymentScriptReferences.iterator(); it.hasNext(); ) {
-            DeploymentScriptReference scriptReference = it.next();
-            if (scriptReference.getProvider().equals(provider)) {
-                return scriptReference;
+    public Provider getProvider(String providerName) {
+        for (Iterator<Provider> it = providers.iterator(); it.hasNext(); ) {
+            Provider provider1 = it.next();
+            if (provider1.getName().equals(provider1.getName())) {
+                return provider1;
             }
         }
-        throw new RuntimeException("Deployment Reference by Provider \"" + provider + "\" was no found.");
+        throw new RuntimeException("Provider with name:\"" + providerName + "\" was no found.");
 
     }
 
     /**
-     * Extract the deployment script reference from the cloud resource description. (When there are multiple providers,
+     * Extract the provider from the cloud resource description. (When there are multiple providers,
      * only the first provider is returned)
      *
      * @return
      */
-    public DeploymentScriptReference getDeploymentScriptReference() {
-        for (Iterator<DeploymentScriptReference> it = deploymentScriptReferences.iterator(); it.hasNext(); ) {
-            DeploymentScriptReference scriptReference = it.next();
-            return scriptReference;
+    public Provider getProvider() {
+        for (Iterator<Provider> it = providers.iterator(); it.hasNext(); ) {
+            Provider provider = it.next();
+            return provider;
         }
-        throw new RuntimeException("No Deployment References found.");
+        throw new RuntimeException("No Provider found.");
     }
 
-    HashSet<DeploymentScriptReference> deploymentScriptReferences;
+    HashSet<Provider> providers;
 
     /**
      * Extract the ID of the cloud resource description

@@ -33,9 +33,8 @@ public class CloudBaseDeploymentConnector implements CloudResourceDeploymentConn
     private static final Logger logger = LoggerFactory.getLogger(CloudBaseDeploymentConnector.class);
 
     public void deploy(CloudResourceDescription description) throws IOException {
-        DeploymentScriptReference reference = description.getDeploymentScriptReference(Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME);
-        File deploymentWorkflowScriptFile = new File(reference.getReference());
-        CloudResourcesComposition compositionWorkflow = DataModelUtil.buildCompositionWorkflowFromFile(deploymentWorkflowScriptFile);
+        Provider provider = description.getProvider(Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME);
+        CloudResourcesComposition compositionWorkflow = provider.getDeploymentWorkflow();
 
         Behavior behavior = compositionWorkflow.getControlFlow().getDeploymentBehavior();
         HashSet<Integer> componentResourceIDs = compositionWorkflow.getControlFlow().getComponentResourceIDs();

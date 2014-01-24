@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud.datamodel;
+package au.edu.unsw.cse.soc.federatedcloud.connectors;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -15,20 +15,19 @@ package au.edu.unsw.cse.soc.federatedcloud.datamodel;
  * limitations under the License.
  */
 
+import au.edu.unsw.cse.soc.federatedcloud.datamodel.CloudResourceDescription;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * User: denis
- * Represent the Deployment script reference of a Cloud resource
+ * Heroku Connector
  */
-public class DeploymentScriptReference {
-    public String getProvider() {
-        return provider;
+public class HerokuConnector implements CloudResourceDeploymentConnector {
+    private static final Logger log = LoggerFactory.getLogger(HerokuConnector.class);
+
+    public void deploy(CloudResourceDescription description) throws Exception {
+        String descriptionID = description.getAttributes().get("id");
+        log.info("Deployment request received for description:" + descriptionID);
     }
-
-    private String provider;
-
-    public String getReference() {
-        return reference;
-    }
-
-    private String reference;
 }

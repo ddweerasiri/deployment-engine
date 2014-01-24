@@ -15,6 +15,8 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  * limitations under the License.
  */
 
+import au.edu.unsw.cse.soc.federatedcloud.connectors.aws.AWSS3Connector;
+import au.edu.unsw.cse.soc.federatedcloud.connectors.rackspace.RackspaceConnector;
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,17 +32,19 @@ public class ConnectorFactory {
         if (Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME.equals(provider)) {
             return new CloudBaseDeploymentConnector();
         } else if ("Pivotal Tracker".equals(provider)) {
-            throw new Exception("Connector class is not implemented for the provider:\"" + provider + "\".");
+            return new PivotalTrackerConnector();
         } else if ("LucidChart".equals(provider)) {
-            throw new Exception("Connector class is not implemented for the provider:\"" + provider + "\".");
+            return new LucidChartConnector();
         } else if ("AWS-S3".equals(provider)) {
             return new AWSS3Connector();
+        } else if ("Rackspace".equals(provider)) {
+            return new RackspaceConnector();
         } else if ("Google Cloud Storage".equals(provider)) {
-            throw new Exception("Connector class is not implemented for the provider:\"" + provider + "\".");
-        } else if ("Google Docs".equals(provider)) {
-            throw new Exception("Connector class is not implemented for the provider:\"" + provider + "\".");
+            return new GoogleCloudConnector();
+        } else if ("Google-Drive".equals(provider)) {
+            return new GoogleDriveConnector();
         } else if ("Heroku".equals(provider)) {
-            throw new Exception("Connector class is not implemented for the provider:\"" + provider + "\".");
+            return new HerokuConnector();
         } else {
             throw new Exception("Connector class is not registered for the provider \"" + provider + "\" in ConnectorFactory.");
         }
