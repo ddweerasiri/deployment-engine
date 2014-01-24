@@ -3,10 +3,9 @@
         "id": 5,
         "name": "Office Suite"
     },
-    "deploymentScriptReferences": [
+    "providers": [
         {
-            "provider": "Google Docs",
-            "reference": "link to online request form in Google Apps Education website"
+            "name": "Google-Drive"
         }
     ]
 }

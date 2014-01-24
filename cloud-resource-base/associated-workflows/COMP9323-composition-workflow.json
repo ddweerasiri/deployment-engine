@@ -1,6 +1,0 @@
-{
-    "controlFlow": {
-        "deploymentBehavior": "PARALLEL",
-        "componentResourceIDs": [1, 3, 5, 6]
-    }
-}

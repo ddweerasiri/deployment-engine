@@ -4,10 +4,9 @@
         "name": "Software Development Platform",
         "allocated_number_of_students": 65
     },
-    "deploymentScriptReferences": [
+    "providers": [
         {
-            "provider": "Heroku",
-            "reference": "link to deployment process of a Heroku user account"
+            "name": "Heroku"
         }
     ]
 }

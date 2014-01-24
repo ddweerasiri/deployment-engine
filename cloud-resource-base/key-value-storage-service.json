@@ -4,14 +4,9 @@
         "name": "S3 Storage",
         "initial_capacity": "5GB"
     },
-    "deploymentScriptReferences": [
+    "providers": [
         {
-            "provider": "AWS-S3",
-            "reference": "link to AWS S3 deployment script"
-        },
-        {
-            "provider": "Google Cloud Storage",
-            "reference": "link to Google Cloud Storage deployment script"
+            "name": "AWS-S3"
         }
     ]
 }
