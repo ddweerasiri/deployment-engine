@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud.connectors;
+package au.edu.unsw.cse.soc.federatedcloud.deployers;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -15,38 +15,38 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  * limitations under the License.
  */
 
-import au.edu.unsw.cse.soc.federatedcloud.connectors.aws.AWSS3Connector;
-import au.edu.unsw.cse.soc.federatedcloud.connectors.rackspace.RackspaceConnector;
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.Constants;
+import au.edu.unsw.cse.soc.federatedcloud.deployers.aws.AWSS3Deployer;
+import au.edu.unsw.cse.soc.federatedcloud.deployers.rackspace.RackspaceDeployer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * User: denis
- * Factory class to generate connectors for the given Provider
+ * Factory class to generate deployers for the given Provider
  */
-public class ConnectorFactory {
-    private static final Logger logger = LoggerFactory.getLogger(ConnectorFactory.class);
+public class DeployerFactory {
+    private static final Logger logger = LoggerFactory.getLogger(DeployerFactory.class);
 
-    public static CloudResourceDeploymentConnector build(String provider) throws Exception {
+    public static CloudResourceDeployer build(String provider) throws Exception {
         if (Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME.equals(provider)) {
-            return new CloudBaseDeploymentConnector();
+            return new CloudBaseDeployer();
         } else if ("Pivotal Tracker".equals(provider)) {
-            return new PivotalTrackerConnector();
+            return new PivotalTrackerDeployer();
         } else if ("LucidChart".equals(provider)) {
-            return new LucidChartConnector();
+            return new LucidChartDeployer();
         } else if ("AWS-S3".equals(provider)) {
-            return new AWSS3Connector();
+            return new AWSS3Deployer();
         } else if ("Rackspace".equals(provider)) {
-            return new RackspaceConnector();
+            return new RackspaceDeployer();
         } else if ("Google Cloud Storage".equals(provider)) {
-            return new GoogleCloudConnector();
+            return new GoogleCloudDeployer();
         } else if ("Google-Drive".equals(provider)) {
-            return new GoogleDriveConnector();
+            return new GoogleDriveDeployer();
         } else if ("Heroku".equals(provider)) {
-            return new HerokuConnector();
+            return new HerokuDeployer();
         } else {
-            throw new Exception("Connector class is not registered for the provider \"" + provider + "\" in ConnectorFactory.");
+            throw new Exception("Deployer class is not registered for the provider \"" + provider + "\" in DeployerFactory.");
         }
     }
 }

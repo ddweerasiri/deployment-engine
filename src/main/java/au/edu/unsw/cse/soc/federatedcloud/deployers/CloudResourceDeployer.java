@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud.connectors;
+package au.edu.unsw.cse.soc.federatedcloud.deployers;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -16,18 +16,11 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  */
 
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.CloudResourceDescription;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * User: denis
- * GoogleCloud Connector
+ * Generic interface for a cloud resource deployer
  */
-public class GoogleCloudConnector implements CloudResourceDeploymentConnector {
-    private static final Logger log = LoggerFactory.getLogger(GoogleCloudConnector.class);
-
-    public void deploy(CloudResourceDescription description) throws Exception {
-        String descriptionID = description.getAttributes().get("id");
-        log.info("Deployment request received for description:" + descriptionID);
-    }
+public interface CloudResourceDeployer {
+    public void deploy(CloudResourceDescription description) throws Exception;
 }

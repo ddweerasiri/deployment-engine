@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud.connectors;
+package au.edu.unsw.cse.soc.federatedcloud.deployers;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -16,21 +16,19 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  */
 
 import au.edu.unsw.cse.soc.federatedcloud.CloudResourceBaseDeploymentEngine;
-import au.edu.unsw.cse.soc.federatedcloud.DataModelUtil;
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 
 /**
  * User: denis
- * Connector for CloudBase deployer
+ * Deployer for CloudBase
  */
-public class CloudBaseDeploymentConnector implements CloudResourceDeploymentConnector {
-    private static final Logger logger = LoggerFactory.getLogger(CloudBaseDeploymentConnector.class);
+public class CloudBaseDeployer implements CloudResourceDeployer {
+    private static final Logger logger = LoggerFactory.getLogger(CloudBaseDeployer.class);
 
     public void deploy(CloudResourceDescription description) throws IOException {
         Provider provider = description.getProvider(Constants.CLOUD_RESOURCE_BASE_PROVIDER_NAME);

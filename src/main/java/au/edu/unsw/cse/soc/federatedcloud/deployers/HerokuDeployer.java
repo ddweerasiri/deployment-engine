@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud.connectors;
+package au.edu.unsw.cse.soc.federatedcloud.deployers;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -21,10 +21,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * User: denis
- * Heroku Connector
+ * Heroku Deployer
  */
-public class HerokuConnector implements CloudResourceDeploymentConnector {
-    private static final Logger log = LoggerFactory.getLogger(HerokuConnector.class);
+public class HerokuDeployer implements CloudResourceDeployer {
+    private static final Logger log = LoggerFactory.getLogger(HerokuDeployer.class);
 
     public void deploy(CloudResourceDescription description) throws Exception {
         String descriptionID = description.getAttributes().get("id");

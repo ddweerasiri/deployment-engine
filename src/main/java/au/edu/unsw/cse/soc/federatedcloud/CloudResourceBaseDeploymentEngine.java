@@ -16,8 +16,8 @@ package au.edu.unsw.cse.soc.federatedcloud;
  */
 
 
-import au.edu.unsw.cse.soc.federatedcloud.connectors.CloudResourceDeploymentConnector;
-import au.edu.unsw.cse.soc.federatedcloud.connectors.ConnectorFactory;
+import au.edu.unsw.cse.soc.federatedcloud.deployers.CloudResourceDeployer;
+import au.edu.unsw.cse.soc.federatedcloud.deployers.DeployerFactory;
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.CloudResourceDescription;
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.Constants;
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.Provider;
@@ -71,8 +71,8 @@ public class CloudResourceBaseDeploymentEngine {
             provider = description.getProvider();
         }
 
-        CloudResourceDeploymentConnector connector = ConnectorFactory.build(provider.getName());
-        connector.deploy(description);
+        CloudResourceDeployer deployer = DeployerFactory.build(provider.getName());
+        deployer.deploy(description);
     }
 
     /**

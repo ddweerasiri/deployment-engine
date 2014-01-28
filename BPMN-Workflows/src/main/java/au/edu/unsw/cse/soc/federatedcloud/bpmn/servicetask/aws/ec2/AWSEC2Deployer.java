@@ -8,6 +8,8 @@ public class AWSEC2Deployer implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution arg0) throws Exception {
 		System.out.println("AWS-EC2 Deployer");
+		//Build CloudResourceDescription
+		//Submit it to the Deployer
 		
 	}
 

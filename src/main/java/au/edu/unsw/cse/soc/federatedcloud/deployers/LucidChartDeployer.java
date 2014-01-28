@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud.connectors;
+package au.edu.unsw.cse.soc.federatedcloud.deployers;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -16,11 +16,18 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  */
 
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.CloudResourceDescription;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * User: denis
- * Generic interface for a cloud deployment connector
+ * LucidChart Deployer
  */
-public interface CloudResourceDeploymentConnector {
-    public void deploy(CloudResourceDescription description) throws Exception;
+public class LucidChartDeployer implements CloudResourceDeployer {
+    private static final Logger log = LoggerFactory.getLogger(LucidChartDeployer.class);
+
+    public void deploy(CloudResourceDescription description) throws Exception {
+        String descriptionID = description.getAttributes().get("id");
+        log.info("Deployment request received for description:" + descriptionID);
+    }
 }

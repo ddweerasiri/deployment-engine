@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud.connectors;
+package au.edu.unsw.cse.soc.federatedcloud.deployers;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -21,10 +21,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * User: denis
- * Google Drive Connector
+ * PivotalTracker Deployer
  */
-public class GoogleDriveConnector implements CloudResourceDeploymentConnector {
-    private static final Logger log = LoggerFactory.getLogger(GoogleDriveConnector.class);
+public class PivotalTrackerDeployer implements CloudResourceDeployer {
+    private static final Logger log = LoggerFactory.getLogger(PivotalTrackerDeployer.class);
 
     public void deploy(CloudResourceDescription description) throws Exception {
         String descriptionID = description.getAttributes().get("id");

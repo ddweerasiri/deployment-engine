@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud.connectors;
+package au.edu.unsw.cse.soc.federatedcloud.deployers;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -21,10 +21,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * User: denis
- * LucidChart Connector
+ * Google Drive Deployer
  */
-public class LucidChartConnector implements CloudResourceDeploymentConnector {
-    private static final Logger log = LoggerFactory.getLogger(LucidChartConnector.class);
+public class GoogleDriveDeployer implements CloudResourceDeployer {
+    private static final Logger log = LoggerFactory.getLogger(GoogleDriveDeployer.class);
 
     public void deploy(CloudResourceDescription description) throws Exception {
         String descriptionID = description.getAttributes().get("id");
