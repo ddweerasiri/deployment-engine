@@ -11,6 +11,11 @@
     <dependencies>
 
         <dependency>
+            <groupId>au.edu.unsw.cse.soc.federatedcloud</groupId>
+            <artifactId>federated-cloud-deployment-engine</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.jclouds.examples</groupId>
             <artifactId>rackspace-examples</artifactId>
             <version>1.0</version>
