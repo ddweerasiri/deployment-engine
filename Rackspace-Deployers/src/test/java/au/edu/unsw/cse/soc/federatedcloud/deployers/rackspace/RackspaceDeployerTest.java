@@ -1,4 +1,4 @@
-package au.edu.unsw.cse.soc.federatedcloud.connectors;
+package au.edu.unsw.cse.soc.federatedcloud.deployers.rackspace;
 /*
  * Copyright (c) 2014, Denis Weerasiri All Rights Reserved.
  *
@@ -15,18 +15,22 @@ package au.edu.unsw.cse.soc.federatedcloud.connectors;
  * limitations under the License.
  */
 
+import au.edu.unsw.cse.soc.federatedcloud.DataModelUtil;
 import au.edu.unsw.cse.soc.federatedcloud.datamodel.CloudResourceDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * User: denis
- * Connector for AWS EC2 cloud
+ * Test case for RackspaceDeployer
  */
-public class AWSS3Connector implements CloudResourceDeploymentConnector {
-    private static final Logger logger = LoggerFactory.getLogger(AWSS3Connector.class);
+public class RackspaceDeployerTest {
+    private static final Logger log = LoggerFactory.getLogger(RackspaceDeployerTest.class);
 
-    public void deploy(CloudResourceDescription description) throws Exception {
-        logger.info("Deployment request received for description:" + description.getAttributes().get("id"));
+    @org.junit.Test
+    public void testDeploy() throws Exception {
+        CloudResourceDescription cloudResourceDescription = DataModelUtil.buildCouldResourceDescriptionFromJSON(8);
+        RackspaceDeployer deployer = new RackspaceDeployer();
+        deployer.deploy(cloudResourceDescription);
     }
 }
